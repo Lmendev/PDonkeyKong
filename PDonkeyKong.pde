@@ -1,18 +1,41 @@
 /*  
-    PDonkey Kong v0.1  --  07/03/2014
-    Developer: Luis Antonio Mendoza Marriaga @lmendoza92
-    Sprites resource : http://www.spriters-resource.com/
-    scaled images 220%
-*/
+ PDonkey Kong v0.1  --  07/03/2014
+ Developer: Luis Antonio Mendoza Marriaga @lmendoza92
+ Sprites resource : http://www.spriters-resource.com/
+ scaled images 220%
+ */
 
- PImage img;
+private PImage bg;
+private Mario mario;
 
-void setup (){
+
+void setup () {
   size(537, 614);
-   
-  img = loadImage("images/bgLevel1.png");
+
+  bg = loadImage("images/bgLevel1.png");
+  mario = new Mario(10, 530, "images/marioSprite.png");
+  
+  frameRate(60);
 }
 
-void draw (){
-  background(img);
+void draw () {
+  background(bg);
+  
+  image(mario.getSprite(), mario.getX(), mario.getY());
+}
+
+void keyPressed() {
+  if (keyCode == LEFT)
+    mario.setMoveLeft(true);
+   
+  if (keyCode == RIGHT)
+    mario.setMoveRight(true); 
+}
+
+void keyReleased() {
+  if (keyCode == LEFT)
+    mario.setMoveLeft(false);
+   
+  if (keyCode == RIGHT)
+    mario.setMoveRight(false);
 }
