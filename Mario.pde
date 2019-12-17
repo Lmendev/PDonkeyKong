@@ -9,6 +9,7 @@ public class Mario {
   private boolean moveRight;
   private boolean alive;
   private PImage sprite[][]= new PImage[2][3];
+  private String direction = "Right";
 
 
   public Mario (int x, int y, String url) {
@@ -52,28 +53,25 @@ public class Mario {
     }
     if (statusj == 3)
       statusj =0;
-
-    
+      
       if (moveLeft){
-        switch(statusj) {
-    case 0:
-      return this.sprite[0][0];
-    case 1:
-      return this.sprite[0][1];
-    case 2:
-      return this.sprite[0][2];
-        }
-      }else{
-        switch(statusj) {
-        case 0:
-      return this.sprite[1][0];
-    case 1:
-      return this.sprite[1][1];
-    case 2:
-      return this.sprite[1][2];
+        this.direction = "Left";
+        return this.sprite[0][statusj];
       }
-    }
-    return null;
+      
+      if (moveRight){
+        this.direction = "Right";
+        return this.sprite[1][statusj];
+      }
+      
+      statusj = 1;
+      switch (direction) {
+        case "Left":
+          return this.sprite[0][0];
+        case "Right":
+          return this.sprite[1][0];
+      }
+      return null;
   }
 
   public void setMoveLeft(boolean moveLeft) {
@@ -84,4 +82,3 @@ public class Mario {
     this.moveRight = moveRight;
   }
 }
-

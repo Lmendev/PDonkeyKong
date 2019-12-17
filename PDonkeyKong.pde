@@ -5,23 +5,31 @@
  scaled images 220%
  */
 
-private PImage bg;
+private PImage bg, bgInicio;
 private Mario mario;
-
+private String status = "InGame";
 
 void setup () {
   size(537, 614);
 
-  bg = loadImage("images/bgLevel1.png");
+  bg       = loadImage("images/bgLevel1.png");
+  bgInicio = loadImage("images/bgInicio.png");
   mario = new Mario(10, 530, "images/marioSprite.png");
   
   frameRate(60);
 }
 
 void draw () {
-  background(bg);
-  
-  image(mario.getSprite(), mario.getX(), mario.getY());
+  switch(status){
+    case "Opening":
+      background(bgInicio);
+      
+    break;
+    case "InGame":
+      background(bg);
+      image(mario.getSprite(), mario.getX(), mario.getY());
+    break;
+  }
 }
 
 void keyPressed() {
