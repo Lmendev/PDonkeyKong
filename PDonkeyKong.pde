@@ -7,25 +7,28 @@
 
 private PImage bg, bgInicio;
 private Mario mario;
-private String status = "InGame";
+private final int stateGame = 0;
+private final int statePause = 1;
+private final int stateOpening = 2;
+private int state = stateGame;
 
 void setup () {
   size(537, 614);
 
   bg       = loadImage("images/bgLevel1.png");
   bgInicio = loadImage("images/bgInicio.png");
-  mario = new Mario(10, 530, "images/marioSprite.png");
+  mario = new Mario(10, 530, "images/marioSprite.png", "images/marioSpriteStairs.png");
   
   frameRate(60);
 }
 
 void draw () {
-  switch(status){
-    case "Opening":
+  switch(state){
+    case stateOpening:
       background(bgInicio);
       
     break;
-    case "InGame":
+    case stateGame:
       background(bg);
       image(mario.getSprite(), mario.getX(), mario.getY());
     break;
@@ -33,17 +36,35 @@ void draw () {
 }
 
 void keyPressed() {
-  if (keyCode == LEFT)
-    mario.setMoveLeft(true);
-   
-  if (keyCode == RIGHT)
-    mario.setMoveRight(true); 
+  switch(keyCode){
+    case LEFT:
+      mario.setMoveLeft(true);
+      break;
+    case RIGHT:
+      mario.setMoveRight(true);
+      break;
+    case UP:
+      mario.setMoveUp(true);
+      break;  
+    case DOWN:
+      mario.setMoveDown(true);
+      break;
+  }
 }
 
 void keyReleased() {
-  if (keyCode == LEFT)
-    mario.setMoveLeft(false);
-   
-  if (keyCode == RIGHT)
-    mario.setMoveRight(false);
+  switch(keyCode){
+    case LEFT:
+      mario.setMoveLeft(false);
+      break;
+    case RIGHT:
+      mario.setMoveRight(false);
+      break;
+    case UP:
+      mario.setMoveUp(false);
+      break;  
+    case DOWN:
+      mario.setMoveDown(false);
+      break;
+  }
 }
